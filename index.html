@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <title>Starter Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<body>
+  <main>
+    <nav class="light-blue lighten-1" role="navigation">
+      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#">Search for a band</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="#">Search for a band</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+    <nav class="grey lighten-4">
+      <div class="nav-wrapper">
+        <form id="search-form">
+          <div class="input-field">
+            <input id="search" type="search" required autofocus="autofocus" placeholder="Search for an artist here">
+            <label for="search"><i class="material-icons">search</i></label>
+            <i class="material-icons">close</i>
+          </div>
+        </form>
+      </div>
+    </nav>
+    <!-- this is the sidebar -->
+
+    <ul id="slide-out" class="side-nav">
+      <li>
+        <div class="userView">
+          <img class="background" src="">
+          <a href="#!user"><img class="circle" src=""></a>
+          <a href="#!name"><span class="white-text name">John Doe</span></a>
+          <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+        </div>
+      </li>
+      <li>
+        <div class="divider"></div>
+      </li>
+      <li id="related-artists"><a class="subheader">Related Bands</a></li>
+
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
+    <!---sidebar end-->
+
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+        <h1 id="band-name" class="header center light-blue-text lighten-1">
+          <span></span>
+        </h1>
+        <div class="row center">
+          <p id="band-bio" class="header col s12 light"></p>
+        </div>
+        <div id="related-bands">
+          <p>related bands:</p>
+          <ul>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <footer class="page-footer light-blue lighten-1">
+    <div class="footer-copyright">
+      <div class="container">
+        Made by Thomas Jameson
+      </div>
+    </div>
+  </footer>
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+</body>
+
+</html>
