@@ -15,12 +15,14 @@ var getArtistInfo = function(artist) {
     $('#band-name').css({
       backgroundImage: 'url(' + data.artist.image[3]['#text'] + ')'
     });
+
     //sets the band bio to the element with the matching ID tag
     $('#band-bio').html(bandBio);
     //this HOF appends a link tag to the band name - link is selected next artist from list
     $('#related-bands ul').html('');
-    similarArtists.forEach(function(artist) {
-      $('#related-bands ul').append('<li><a href="#">' + artist.name + '</a></li > ');
+    similarArtists.forEach(function(artist, index) {
+      $('#related-bands ul').append((index + 1) + '. ' + '<li><a href="#">' + artist.name + '</a></li > ');
+      console.log(index);
     }, [1]);
   })
 };
@@ -30,9 +32,6 @@ var getTopTrack = function(artist) {
   $.get('http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=' + artist + '&api_key=' + key + '&format=json', function(data) {
     var topTrackName = data.toptracks.track[1].name;
     var topTrackUrl = data.toptracks.track[1].url;
-    console.log('track name ', topTrackName);
-    console.log('track link', topTrackUrl);
-    console.log('top tracks', data);
   })
 };
 ///end get song info
@@ -53,22 +52,18 @@ var getTopTrack = function(artist) {
       var searchTerm = $('#search').val();
       //(JQ method) ajax request to pull artist object from last.fm
       $.get('http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=' + searchTerm + '&api_key=' + key + '&format=json', function(data) {
-        //stores
+        //stores artist object
         var artist = data.results.artistmatches.artist[0];
-        console.log(artist);
+        //arist key - necessary?
         var artistID = artist.mbid;
-
         getArtistInfo(artist.name);
         getTopTrack(artist.name);
       });
     });
 
     $('#related-bands ul').on('click', 'li a', function(event) {
-      event.preventDefault();
       var artist = $(this).text();
-      console.log(artist);
       getArtistInfo(artist);
-
       $('#slide-out').append('<li>' + '      ' + artist + '</li>');
       // console.log('this', artist);
     });
