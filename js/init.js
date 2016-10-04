@@ -22,10 +22,9 @@ function getArtistInfo(artist) {
     //this HOF appends a link tag to the band name - link is selected next artist from list
     $('#related-bands ul').html('');
     similarArtists.forEach(function(artist, index) {
-      $('#related-bands ul').append('<li>' + (index + 1) + '. ' + '<a href="#">' + artist.name + '</a></li > ');
+      $('#related-bands ul').append('<li class="related-bands-lis">' + (index + 1) + '. ' + '<a href="#">' + artist.name + '</a></li > ');
     }, [1]);
   })
-
 };
 ////try to get song
 function getTopTrack(artist) {
@@ -38,8 +37,6 @@ function getTopTrack(artist) {
 //end get song info
 
 //spotify get artist ID
-
-
 
 function getSpotifyID(artist) {
   //using variable name instead of key makes for cleaner more readable code, also less room for errors when copying
@@ -58,13 +55,28 @@ function getSpotifyTracks(artistID) {
 
     var songUrl = data.tracks[0].preview_url;
     var audioTag = new Audio(songUrl);
-    $('#audioDiv').append(audioTag);
+    $('#audioDiv').html(audioTag);
+    audioTag.play();
   })
 };
 // end artist toptracks
 
+function search(searchTerm) {
+  //(JQ method) ajax request to pull artist object from last.fm
+  $.get('http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=' + searchTerm + '&api_key=' + key + '&format=json', function(data) {
+    //stores artist object
+    var artist = data.results.artistmatches.artist[0];
+    //arist key - necessary?
+    var artistID = artist.mbid;
+    getArtistInfo(artist.name);
+    getTopTrack(artist.name);
+    getSpotifyID(artist.name);
+    //clear search bar on submit
+    $('#search').val('');
+  });
+}
 
-(function($) { //IIF
+(function($) { //IIFE
   $(function() {
 
     // Initialize collapse button (found on mat. site)
@@ -77,25 +89,15 @@ function getSpotifyTracks(artistID) {
       event.preventDefault();
       //sets the entered text in the search bar to a variable
       var searchTerm = $('#search').val();
-      //(JQ method) ajax request to pull artist object from last.fm
-      $.get('http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=' + searchTerm + '&api_key=' + key + '&format=json', function(data) {
-        //stores artist object
-        var artist = data.results.artistmatches.artist[0];
-        //arist key - necessary?
-        var artistID = artist.mbid;
-        getArtistInfo(artist.name);
-        getTopTrack(artist.name);
-        getSpotifyID(artist.name);
-        //clear search bar on submit
-        $('#search').val('');
-      });
+      search(searchTerm)
     });
 
     $('#related-bands ul').on('click', 'li a', function(event) {
       // event.preventDefault();
       var artist = $(this).text();
       getArtistInfo(artist);
-      $('#slide-out').append('<li>' + artist + '</li>');
+      $('#slide-out').append('<li class="related-bands-lis">' + '<a href="#">' + artist + '</a></li > ');
+      search(artist);
     });
 
   }); // end of document ready
