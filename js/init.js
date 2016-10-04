@@ -15,16 +15,16 @@ var getArtistInfo = function(artist) {
     $('#band-name').css({
       backgroundImage: 'url(' + data.artist.image[3]['#text'] + ')'
     });
-
+    console.log('artist object', data.artist);
     //sets the band bio to the element with the matching ID tag
     $('#band-bio').html(bandBio);
     //this HOF appends a link tag to the band name - link is selected next artist from list
     $('#related-bands ul').html('');
     similarArtists.forEach(function(artist, index) {
-      $('#related-bands ul').append((index + 1) + '. ' + '<li><a href="#">' + artist.name + '</a></li > ');
-      console.log(index);
+      $('#related-bands ul').append('<li>' + (index + 1) + '. ' + '<a href="#">' + artist.name + '</a></li > ');
     }, [1]);
   })
+
 };
 ////try to get song
 var getTopTrack = function(artist) {
@@ -58,13 +58,14 @@ var getTopTrack = function(artist) {
         var artistID = artist.mbid;
         getArtistInfo(artist.name);
         getTopTrack(artist.name);
+        $('#search').val('');
       });
     });
 
     $('#related-bands ul').on('click', 'li a', function(event) {
       var artist = $(this).text();
       getArtistInfo(artist);
-      $('#slide-out').append('<li>' + '      ' + artist + '</li>');
+      $('#slide-out').append('<li>' + artist + '</li>');
       // console.log('this', artist);
     });
 
