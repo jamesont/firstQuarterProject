@@ -1,8 +1,10 @@
 //API keys, made global
 var key = '6482c833c701e11ea0e0ad3af29e89a1';
 var secret = '965ff338e1397345cb1eb0290fe3aa56';
+var spotifyClientID = '7e45ff3bfe924046ace9fecf82b5b9e2';
+var spotifyClientSecret = '9d723e0777284964ba863aa3f67c6219';
 
-var getArtistInfo = function(artist) {
+function getArtistInfo(artist) {
   //using variable name instead of key makes for cleaner more readable code, also less room for errors when copying
   $.get('http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=' + artist + '&api_key=' + key + '&format=json', function(data) {
     //get rid of stupid last.fm advertisement in the band bio
@@ -15,7 +17,6 @@ var getArtistInfo = function(artist) {
     $('#band-name').css({
       backgroundImage: 'url(' + data.artist.image[3]['#text'] + ')'
     });
-    console.log('artist object', data.artist);
     //sets the band bio to the element with the matching ID tag
     $('#band-bio').html(bandBio);
     //this HOF appends a link tag to the band name - link is selected next artist from list
@@ -27,14 +28,40 @@ var getArtistInfo = function(artist) {
 
 };
 ////try to get song
-var getTopTrack = function(artist) {
+function getTopTrack(artist) {
   //using variable name instead of key makes for cleaner more readable code, also less room for errors when copying
   $.get('http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=' + artist + '&api_key=' + key + '&format=json', function(data) {
     var topTrackName = data.toptracks.track[1].name;
     var topTrackUrl = data.toptracks.track[1].url;
   })
 };
-///end get song info
+//end get song info
+
+//spotify get artist ID
+
+
+
+function getSpotifyID(artist) {
+  //using variable name instead of key makes for cleaner more readable code, also less room for errors when copying
+  $.get("https://api.spotify.com/v1/search?q=" + artist + "&type=artist", function(data) {
+    var spotifyID = data.artists.items[0].id;
+    getSpotifyTracks(spotifyID)
+  })
+};
+//end spotify get artist ID
+
+//spotify get artist toptracks
+function getSpotifyTracks(artistID) {
+
+  //using variable name instead of key makes for cleaner more readable code, also less room for errors when copying
+  $.get("https://api.spotify.com/v1/artists/" + artistID + "/top-tracks?country=US", function(data) {
+
+    var songUrl = data.tracks[0].preview_url;
+    var audioTag = new Audio(songUrl);
+    $('#audioDiv').append(audioTag);
+  })
+};
+// end artist toptracks
 
 
 (function($) { //IIF
@@ -58,15 +85,17 @@ var getTopTrack = function(artist) {
         var artistID = artist.mbid;
         getArtistInfo(artist.name);
         getTopTrack(artist.name);
+        getSpotifyID(artist.name);
+        //clear search bar on submit
         $('#search').val('');
       });
     });
 
     $('#related-bands ul').on('click', 'li a', function(event) {
+      // event.preventDefault();
       var artist = $(this).text();
       getArtistInfo(artist);
       $('#slide-out').append('<li>' + artist + '</li>');
-      // console.log('this', artist);
     });
 
   }); // end of document ready
