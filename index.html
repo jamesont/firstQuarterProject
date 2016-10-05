@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-  <title>Starter Template - Materialize</title>
+  <title>Bandwagon</title>
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -15,13 +15,13 @@
 <body>
   <main>
     <nav class="light-blue lighten-1" role="navigation">
-      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Bandwagon</a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="#">Search for a band</a></li>
+          <li><a href="#">Your one stop for all your music needs... kind of... not really...</a></li>
         </ul>
 
         <ul id="nav-mobile" class="side-nav">
-          <li><a href="#">Search for a band</a></li>
+          <li><a href="#">Your one stop for all your music needs... kind of... not really...</a></li>
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>
@@ -37,21 +37,18 @@
         </form>
       </div>
     </nav>
+
     <!-- this is the sidebar -->
 
     <ul id="slide-out" class="side-nav">
       <li>
-        <div class="userView">
-          <img class="background" src="">
-          <a href="#!user"><img class="circle" src=""></a>
-          <a href="#!name"><span class="white-text name">John Doe</span></a>
-          <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+        <div id="audioDiv" class="userView">
         </div>
       </li>
       <li>
         <div class="divider"></div>
       </li>
-      <li id="related-artists"><a class="subheader">Related Bands</a></li>
+      <li id="related-artists"><a class="subheader">Related Bands:</a></li>
 
     </ul>
     <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -67,15 +64,16 @@
           <p id="band-bio" class="header col s12 light"></p>
         </div>
         <div id="related-bands">
-          <p>related bands:</p>
+          <p>Related bands:</p>
           <ul>
-
+            <!-- ul for jquery appended bands  -->
           </ul>
         </div>
       </div>
     </div>
 
   </main>
+
   <footer class="page-footer light-blue lighten-1">
     <div class="footer-copyright">
       <div class="container">
