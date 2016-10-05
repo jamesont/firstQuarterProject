@@ -53,3 +53,45 @@ main {
   opacity: .6;
   z-index: 0
 }
+
+#Button {
+  position: absolute;
+  top: 10px;
+  left: 25px;
+  margin: 5px;
+  color: white;
+  margin-top: 9px;
+  margin-left: 9px
+}
+
+#oneStop {
+  margin-right: -200px;
+}
+
+#madeBy {
+  margin-left: 11px;
+}
+
+#related-bands {
+  position: left;
+  margin-left: 20px;
+  margin-top: -375px;
+}
+
+#searchBar {
+  width: 25%;
+  margin-top: -65px;
+  margin-left: 100px;
+}
+
+#index-banner {
+  margin-top: 90px;
+}
+
+#sideBarImg {
+  height: 200px;
+}
+
+#listeningTo {
+  top: 100px
+}

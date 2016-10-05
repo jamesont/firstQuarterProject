@@ -11,11 +11,13 @@ function getArtistInfo(artist) {
     var bandBio = data.artist.bio.summary.replace(/<a(\s[^>]*)?>.*?<\/a>/ig, '');
     //sets variable of list of similar artists from the band object
     var similarArtists = data.artist.similar.artist;
-    console.log('lastfm', data);
     //sets the html element to the name of the current artist
     $('#band-name span').text(data.artist.name);
     //changes the background image to the current bands image (also found in object)
     $('#band-name').css({
+      backgroundImage: 'url(' + data.artist.image[3]['#text'] + ')'
+    });
+    $('#sideBarImg').css({
       backgroundImage: 'url(' + data.artist.image[3]['#text'] + ')'
     });
     //sets the band bio to the element with the matching ID tag
@@ -23,9 +25,12 @@ function getArtistInfo(artist) {
     //this HOF appends a link tag to the band name - link is selected next artist from list
     $('#related-bands ul').html('');
     similarArtists.forEach(function(artist, index) {
-      $('#related-bands ul').append('<li class="related-bands-lis">' + (index + 1) + '. ' + '<a href="#">' + artist.name + '</a></li > ');
-      console.log('line 26');
+      var listItem = $('<li class="related-bands-lis">' + '<a href="#">' + artist.name + '</a></li>')
+      listItem.hide().appendTo('#related-bands ul').fadeIn(1000 + (index * 1500));
     }, [1]);
+    if (similarArtists.length === 0) {
+      $('#related-bands ul').append('<li class="related-bands-lis">Sorry, your search did not <br> return any similar artists</li>');
+    }
   })
 };
 ////try to get song
@@ -34,7 +39,6 @@ function getTopTrack(artist) {
   $.get('http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=' + artist + '&api_key=' + key + '&format=json', function(data) {
     var topTrackName = data.toptracks.track[1].name;
     var topTrackUrl = data.toptracks.track[1].url;
-    console.log('spotify', data);
   })
 };
 //spotify get artist ID
@@ -63,8 +67,7 @@ function search(searchTerm) {
   $.get('http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=' + searchTerm + '&api_key=' + key + '&format=json', function(data) {
     //stores artist object
     var artist = data.results.artistmatches.artist[0];
-    //arist key - necessary?
-    var artistID = artist.mbid;
+
     getArtistInfo(artist.name);
     getTopTrack(artist.name);
     getSpotifyID(artist.name);
