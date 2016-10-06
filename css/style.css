@@ -95,3 +95,7 @@ main {
 #listeningTo {
   top: 100px
 }
+
+.related-bands-lis {
+  text-transform: capitalize;
+}
