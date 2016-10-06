@@ -51,7 +51,9 @@ main {
   left: 0;
   background-image: linear-gradient(to bottom right, #002f4b, #dc4225);
   opacity: .6;
-  z-index: 0
+  z-index: 0;
+  /*width: 714.844px;
+  height: 300px;*/
 }
 
 #Button {
@@ -74,7 +76,7 @@ main {
 
 #related-bands {
   position: left;
-  margin-left: 20px;
+  margin-left: 100px;
   margin-top: -375px;
 }
 
