@@ -39,6 +39,7 @@ function getTopTrack(artist) {
   $.get('http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=' + artist + '&api_key=' + key + '&format=json', function(data) {
     var topTrackName = data.toptracks.track[1].name;
     var topTrackUrl = data.toptracks.track[1].url;
+
   })
 };
 //spotify get artist ID
@@ -49,7 +50,9 @@ function getSpotifyID(artist) {
     getSpotifyTracks(spotifyID)
   })
 };
+///
 
+///
 //spotify get artist toptracks
 function getSpotifyTracks(artistID) {
   //using variable name instead of key makes for cleaner more readable code, also less room for errors when copying
@@ -79,7 +82,11 @@ function search(searchTerm) {
 (function($) { //IIFE
   $(function() {
     // Initialize collapse button (found on mat. site)
-    $(".button-collapse").sideNav();
+    $(".button-collapse").sideNav({
+      menuWidth: 240, // Default is 240
+      edge: 'left', // Choose the horizontal origin
+      closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    });
     // Initialize collapsible (uncomment the line below if you use the dropdown variation)
     //$('.collapsible').collapsible();
     $('#search-form').on('submit', function(event) {
@@ -87,14 +94,31 @@ function search(searchTerm) {
       event.preventDefault();
       //sets the entered text in the search bar to a variable
       var searchTerm = $('#search').val();
+      $('#slide-out').append('<li class="related-bands-lis">' + '<a href="#">' + searchTerm + '</li>');
       search(searchTerm)
     });
     $('#related-bands ul').on('click', 'li a', function(event) {
-      // event.preventDefault();
+      event.preventDefault();
       var artist = $(this).text();
       getArtistInfo(artist);
-      $('#slide-out').append('<li class="related-bands-lis">' + '<a href="#">' + artist + '</a></li > ');
+      var appendedSideBarArtists = $('<li class="related-bands-lis">' + '<a href="#">' + artist + '</a></li > ');
+      $('#slide-out').append(appendedSideBarArtists);
       search(artist);
+      ///
+      appendedSideBarArtists.on('click', function(event) {
+        event.preventDefault();
+        //fetch id from li
+        getArtistInfo(appendedSideBarArtists[0].innerText.replace(/\W/, ''));
+        getTopTrack(appendedSideBarArtists[0].innerText.replace(/\W/, ''));
+        getSpotifyID(appendedSideBarArtists[0].innerText.replace(/\W/, ''));
+        getSpotifyTracks(appendedSideBarArtists[0].innerText.replace(/\W/, ''));
+        search(appendedSideBarArtists[0].innerText.replace(/\W/, ''));
+        $('.button-collapse').sideNav({
+          menuWidth: 240, // Default is 240
+          edge: 'left', // Choose the horizontal origin
+          closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        });
+      });
     });
-  }); // end of document ready
+  });
 })(jQuery); // end of jQuery name space
