@@ -7,9 +7,11 @@ function getArtistInfo(artist) {
     var bandBio = data.artist.bio.summary.replace(/<a(\s[^>]*)?>.*?<\/a>/ig, '');
     var similarArtists = data.artist.similar.artist;
     $('#band-name span').text(data.artist.name);
+    //
     $('#band-name').css({
-      backgroundImage: 'url(' + data.artist.image[3]['#text'] + ')'
+      backgroundImage: 'url(' + data.artist.image[2]['#text'] + ')'
     });
+    //
     $('#sideBarImg').css({
       backgroundImage: 'url(' + data.artist.image[3]['#text'] + ')'
     });

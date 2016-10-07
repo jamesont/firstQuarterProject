@@ -52,8 +52,6 @@ main {
   background-image: linear-gradient(to bottom right, #002f4b, #dc4225);
   opacity: .6;
   z-index: 0;
-  /*width: 714.844px;
-  height: 300px;*/
 }
 
 #Button {
@@ -67,7 +65,7 @@ main {
 }
 
 #oneStop {
-  margin-right: -200px;
+  margin-right: -420px;
 }
 
 #madeBy {
@@ -115,4 +113,8 @@ main {
   margin-left: 100px;
   margin-bottom: 20px;
   list-style-type: none;
+}
+
+#logo-container {
+  margin-left: 200px
 }
