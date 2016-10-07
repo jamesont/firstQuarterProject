@@ -16,37 +16,39 @@ function getArtistInfo(artist) {
     $('#band-bio').html(bandBio);
     $('#related-bands ul').html('');
     similarArtists.forEach(function(artist, index) {
-      var listItem = $('<li class="related-bands-lis">' + '<a href="#">' + artist.name + '</a></li>')
+      var listItem = $('<li class="related-bands-lis">' + '<a href="#">' + artist.name + '</a></li>');
       listItem.hide().appendTo('#related-bands ul').fadeIn(1000 + (index * 1500));
     }, [1]);
     if (similarArtists.length === 0) {
       $('#related-bands ul').append('<li class="related-bands-lis">Sorry, your search did not <br> return any similar artists</li>');
-    }
-  })
+    };
+  });
 };
 
 function getTopTrack(artist) {
   $.get('http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=' + artist + '&api_key=' + key + '&format=json', function(data) {
     var topTrackName = data.toptracks.track[1].name;
     var topTrackUrl = data.toptracks.track[1].url;
-  })
+  });
 };
 
 function getSpotifyID(artist) {
   $.get("https://api.spotify.com/v1/search?q=" + artist + "&type=artist", function(data) {
     var spotifyID = data.artists.items[0].id;
-    getSpotifyTracks(spotifyID)
-      // NOTE:
-  })
+    getSpotifyTracks(spotifyID);
+  });
 };
 
 function getSpotifyTracks(artistID) {
   $.get("https://api.spotify.com/v1/artists/" + artistID + "/top-tracks?country=US", function(data) {
     var songUrl = data.tracks[0].preview_url;
+    var songName = data.tracks[0].name;
+    var artist = data.tracks[0].artists[0].name;
     var audioTag = new Audio(songUrl);
+    $('#current-songTrack').html(songName).hide().fadeIn(10000);;
     $('#audioDiv').html(audioTag);
     audioTag.play();
-  })
+  });
 };
 
 function search(searchTerm) {
@@ -56,13 +58,13 @@ function search(searchTerm) {
       $('#band-name').css({
         backgroundImage: 'url(' + './js/couldntFind.jpeg' + ')'
       });
-    }
+    };
     getArtistInfo(artist.name);
     getTopTrack(artist.name);
     getSpotifyID(artist.name);
     $('#search').val('');
   });
-}
+};
 
 (function($) {
   $(function() {
@@ -76,12 +78,12 @@ function search(searchTerm) {
       event.preventDefault();
       var searchTerm = $('#search').val();
       var clickedBandLi = $('<li class="related-bands-lis" id="clicked-Band">' + '<a href="#">' + searchTerm + '</li>');
-      $('#slide-out').append(clickedBandLi)
+      $('#slide-out').append(clickedBandLi);
       search(searchTerm);
       clickedBandLi.on('click', function(event) {
         event.preventDefault();
         search(searchTerm);
-      })
+      });
     });
 
     $('#related-bands ul').on('click', 'li a', function(event) {
@@ -112,4 +114,4 @@ function bandLinks(event, appendedSideBarArtists) {
       closeOnClick: true
     });
   });
-}
+};

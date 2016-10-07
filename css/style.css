@@ -102,9 +102,17 @@ main {
   text-transform: capitalize;
 }
 
+#thing {
+  margin-left: 100px
+}
+
 #current-track {
-  /*width: 100px;
-  height: 100px;*/
+  width: 100px;
+  height: 100px;
+}
+
+#current-songTrack {
   margin-left: 100px;
   margin-bottom: 20px;
+  list-style-type: none;
 }
