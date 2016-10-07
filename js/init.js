@@ -77,7 +77,7 @@ function search(searchTerm) {
     $('#search-form').on('submit', function(event) {
       event.preventDefault();
       var searchTerm = $('#search').val();
-      var clickedBandLi = $('<li class="related-bands-lis" id="clicked-Band">' + '<a href="#">' + searchTerm + '</li>');
+      var clickedBandLi = $('<li class="related-bands-lis" id="clicked-Band">' + '<a href="#" style="color: red">' + searchTerm + '</li>');
       $('#slide-out').append(clickedBandLi);
       search(searchTerm);
       clickedBandLi.on('click', function(event) {
