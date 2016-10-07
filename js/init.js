@@ -21,7 +21,6 @@ function getArtistInfo(artist) {
     }, [1]);
     if (similarArtists.length === 0) {
       $('#related-bands ul').append('<li class="related-bands-lis">Sorry, your search did not <br> return any similar artists</li>');
-
     }
   })
 };
@@ -37,6 +36,7 @@ function getSpotifyID(artist) {
   $.get("https://api.spotify.com/v1/search?q=" + artist + "&type=artist", function(data) {
     var spotifyID = data.artists.items[0].id;
     getSpotifyTracks(spotifyID)
+      // NOTE:
   })
 };
 
@@ -71,12 +71,19 @@ function search(searchTerm) {
       edge: 'left',
       closeOnClick: true
     });
+
     $('#search-form').on('submit', function(event) {
       event.preventDefault();
       var searchTerm = $('#search').val();
-      $('#slide-out').append('<li class="related-bands-lis">' + '<a href="#">' + searchTerm + '</li>');
-      search(searchTerm)
+      var clickedBandLi = $('<li class="related-bands-lis" id="clicked-Band">' + '<a href="#">' + searchTerm + '</li>');
+      $('#slide-out').append(clickedBandLi)
+      search(searchTerm);
+      clickedBandLi.on('click', function(event) {
+        event.preventDefault();
+        search(searchTerm);
+      })
     });
+
     $('#related-bands ul').on('click', 'li a', function(event) {
       event.preventDefault();
       var artist = $(this).text();
@@ -84,20 +91,25 @@ function search(searchTerm) {
       var appendedSideBarArtists = $('<li class="related-bands-lis">' + '<a href="#">' + artist + '</a></li > ');
       $('#slide-out').append(appendedSideBarArtists);
       search(artist);
-      appendedSideBarArtists.on('click', function(event) {
-        event.preventDefault();
-        getArtistInfo(appendedSideBarArtists[0].innerText.replace(/\W/, ''));
-        getTopTrack(appendedSideBarArtists[0].innerText.replace(/\W/, ''));
-        getSpotifyID(appendedSideBarArtists[0].innerText.replace(/\W/, ''));
-        getSpotifyTracks(appendedSideBarArtists[0].innerText.replace(/\W/, ''));
-        search(appendedSideBarArtists[0].innerText.replace(/\W/, ''));
-        $('.button-collapse').sideNav({
-          menuWidth: 240,
-          edge: 'left',
-          closeOnClick: true
-        });
-      });
+      appendedSideBarArtists.on('click', bandLinks(event, appendedSideBarArtists));
     });
   });
 })(jQuery);
 (jQuery);
+
+function bandLinks(event, appendedSideBarArtists) {
+  appendedSideBarArtists.on('click', function(event) {
+    event.preventDefault();
+    var appended = appendedSideBarArtists[0].innerText.replace(/\W/, '');
+    getArtistInfo(appended);
+    getTopTrack(appended);
+    getSpotifyID(appended);
+    getSpotifyTracks(appended);
+    search(appended);
+    $('.button-collapse').sideNav({
+      menuWidth: 240,
+      edge: 'left',
+      closeOnClick: true
+    });
+  });
+}

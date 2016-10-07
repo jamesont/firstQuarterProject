@@ -77,7 +77,7 @@ main {
 #related-bands {
   position: left;
   margin-left: 100px;
-  margin-top: -375px;
+  margin-top: -420px;
 }
 
 #searchBar {
@@ -100,4 +100,11 @@ main {
 
 .related-bands-lis {
   text-transform: capitalize;
+}
+
+#current-track {
+  /*width: 100px;
+  height: 100px;*/
+  margin-left: 100px;
+  margin-bottom: 20px;
 }
