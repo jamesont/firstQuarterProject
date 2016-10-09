@@ -53,17 +53,19 @@ function getSpotifyTracks(artistID) {
   });
 };
 
-function search(searchTerm) {
+function search(searchTerm, clickedBandLi) {
   $.get('http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=' + searchTerm + '&api_key=' + key + '&format=json', function(data) {
     var artist = data.results.artistmatches.artist[0];
     if (artist == undefined) {
       $('#band-name').css({
         backgroundImage: 'url(' + './js/couldntFind.jpeg' + ')'
       });
+    } else {
+      $('#slide-out').append(clickedBandLi);
+      getArtistInfo(artist.name);
+      getTopTrack(artist.name);
+      getSpotifyID(artist.name);
     };
-    getArtistInfo(artist.name);
-    getTopTrack(artist.name);
-    getSpotifyID(artist.name);
     $('#search').val('');
   });
 };
@@ -80,11 +82,11 @@ function search(searchTerm) {
       event.preventDefault();
       var searchTerm = $('#search').val();
       var clickedBandLi = $('<li class="related-bands-lis" id="clicked-Band">' + '<a href="#" style="color: red">' + searchTerm + '</li>');
-      $('#slide-out').append(clickedBandLi);
-      search(searchTerm);
+
+      search(searchTerm, clickedBandLi);
       clickedBandLi.on('click', function(event) {
         event.preventDefault();
-        search(searchTerm);
+        search(searchTerm, clickedBandLi);
       });
     });
 

@@ -65,7 +65,7 @@ main {
 }
 
 #oneStop {
-  margin-right: -420px;
+  margin-right: -300px;
 }
 
 #madeBy {
@@ -75,12 +75,12 @@ main {
 #related-bands {
   position: left;
   margin-left: 100px;
-  margin-top: -420px;
+  margin-top: -500px;
 }
 
 #searchBar {
   width: 25%;
-  margin-top: -65px;
+  margin-top: -60px;
   margin-left: 100px;
 }
 
@@ -101,7 +101,8 @@ main {
 }
 
 #thing {
-  margin-left: 100px
+  margin-left: 50px;
+  /*margin-top: 10px*/
 }
 
 #current-track {
@@ -118,3 +119,13 @@ main {
 #logo-container {
   margin-left: 200px
 }
+
+#current-songTrack {
+  color: red;
+}
+
+
+/*
+#current-songTrack {
+  margin-top: 20px;
+}*/
