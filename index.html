@@ -14,19 +14,39 @@
 
 <body>
   <main>
-    <nav class="light-blue lighten-1" role="navigation">
-      <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Bandwagon</a>
-        <ul class="right hide-on-med-and-down">
-          <li><a href="#">Your one stop for all your music needs... kind of... not really...</a></li>
+    <nav class="red darken-1" role="navigation">
+
+      <div id="thing" class="nav-wrapper container"><a id="logo-container" class="brand-logo center">Bandwagon</a>
+        <ul id="oneStop" class="right hide-on-med-and-down">
+          <li>Your one stop for all your song demos</li>
         </ul>
 
-        <ul id="nav-mobile" class="side-nav">
-          <li><a href="#">Your one stop for all your music needs... kind of... not really...</a></li>
+        <ul id="oneStop" id="nav-mobile" class="side-nav">
+          <li>Your one stop for all your song demos</li>
         </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <!--<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a> -->
       </div>
     </nav>
-    <nav class="grey lighten-4">
+
+    <!-- this is the sidebar -->
+
+    <ul id="slide-out" class="side-nav">
+      <li id="sideBarImg">
+        <div id="audioDiv" class="userView">
+        </div>
+      </li>
+      <li>
+        <div class="divider"></div>
+      </li>
+      <li id="related-artists">
+        <a class="subheader">Related Bands:</a>
+      </li>
+    </ul>
+
+    <a id="Button" href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
+    <!---sidebar end-->
+    <nav id="searchBar" class="grey lighten-4">
       <div class="nav-wrapper">
         <form id="search-form">
           <div class="input-field">
@@ -37,47 +57,36 @@
         </form>
       </div>
     </nav>
-
-    <!-- this is the sidebar -->
-
-    <ul id="slide-out" class="side-nav">
-      <li>
-        <div id="audioDiv" class="userView">
-        </div>
-      </li>
-      <li>
-        <div class="divider"></div>
-      </li>
-      <li id="related-artists"><a class="subheader">Related Bands:</a></li>
-
-    </ul>
-    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-
-    <!---sidebar end-->
-
     <div class="section no-pad-bot" id="index-banner">
+      <!-- background picture -->
       <div class="container">
-        <h1 id="band-name" class="header center light-blue-text lighten-1">
+        <div>
+          <h1 id="band-name" class="header center dark-text darken-1">
           <span></span>
         </h1>
-        <div class="row center">
-          <p id="band-bio" class="header col s12 light"></p>
-        </div>
-        <div id="related-bands">
-          <p>Related bands:</p>
-          <ul>
-            <!-- ul for jquery appended bands  -->
-          </ul>
+          <div class="row center">
+            <p id="band-bio" class="header col s12 dark"></p>
+          </div>
         </div>
       </div>
-    </div>
+      <div id="thing">
+        <p>You are currently listening to:
+          <li id="current-songTrack"></li>
+        </p>
+      </div>
 
+      <div id="related-bands">
+        <p>Related bands:</p>
+        <ul>
+          <!-- ul for jquery appended bands  -->
+        </ul>
+      </div>
   </main>
 
-  <footer class="page-footer light-blue lighten-1">
+  <footer class="page-footer red darken-1">
     <div class="footer-copyright">
-      <div class="container">
-        Made by Thomas Jameson
+      <div class="container center">
+        © 2016 Thomas Jameson
       </div>
     </div>
   </footer>
@@ -85,7 +94,6 @@
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
-
 </body>
 
 </html>

@@ -51,5 +51,81 @@ main {
   left: 0;
   background-image: linear-gradient(to bottom right, #002f4b, #dc4225);
   opacity: .6;
-  z-index: 0
+  z-index: 0;
 }
+
+#Button {
+  position: absolute;
+  top: 10px;
+  left: 25px;
+  margin: 5px;
+  color: white;
+  margin-top: 9px;
+  margin-left: 9px
+}
+
+#oneStop {
+  margin-right: -300px;
+}
+
+#madeBy {
+  margin-left: 11px;
+}
+
+#related-bands {
+  position: left;
+  margin-left: 100px;
+  margin-top: -500px;
+}
+
+#searchBar {
+  width: 25%;
+  margin-top: -60px;
+  margin-left: 100px;
+}
+
+#index-banner {
+  margin-top: 90px;
+}
+
+#sideBarImg {
+  height: 200px;
+}
+
+#listeningTo {
+  top: 100px
+}
+
+.related-bands-lis {
+  text-transform: capitalize;
+}
+
+#thing {
+  margin-left: 50px;
+  /*margin-top: 10px*/
+}
+
+#current-track {
+  width: 100px;
+  height: 100px;
+}
+
+#current-songTrack {
+  margin-left: 100px;
+  margin-bottom: 20px;
+  list-style-type: none;
+}
+
+#logo-container {
+  margin-left: 200px
+}
+
+#current-songTrack {
+  color: red;
+}
+
+
+/*
+#current-songTrack {
+  margin-top: 20px;
+}*/
