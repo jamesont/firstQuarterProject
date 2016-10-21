@@ -1,5 +1,5 @@
-node_modules
-.DS_
 .DS_Store
 node_modules
+yarn.lock
+node_modules/
 .DS_Store

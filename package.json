@@ -1,0 +1,30 @@
+{
+  "name": "project_1",
+  "version": "1.0.0",
+  "description": "first quarter project",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesont/firstQuarterProject.git"
+  },
+  "keywords": [
+    "api",
+    "music",
+    "JSON",
+    "ajax"
+  ],
+  "author": "Thomas Jameson <thomas.gregory.jameson@gmail.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/jamesont/firstQuarterProject/issues"
+  },
+  "homepage": "https://github.com/jamesont/firstQuarterProject#readme"
+}
